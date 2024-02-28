@@ -12,13 +12,13 @@ defmodule GameTest do
   test "state isn't change for :won or lost" do
     for state <- [:lost, :won] do
       game = Game.new_game() |> Map.put(:game_state, state)
-      assert ^{game, _t} = Game.make_move(game, "x")
+      assert {^game,_} = Game.make_move(game, "x")
     end
   end
 
 
   test "first occurent of letter isn't already used" do
-    {game, _tally} = Game.new_game()
+    game = Game.new_game()
     {game, _tally} = Game.make_move(game,"x")
     assert game.game_state != :already_guessed
   end
@@ -77,19 +77,19 @@ defmodule GameTest do
      end
 
      test "lose game is recognize"do
-      game = Game.new_game("x")
-      moves = [
+      game = Game.new_game("xy")
+      _moves = [
         {"a", :bad_guess},
         {"b", :bad_guess},
         {"c", :bad_guess},
         {"d", :bad_guess},
         {"f", :bad_guess},
         {"g", :bad_guess},
-        {"h", :lose},
+        {"h", :lost},
       ]
       |> Enum.with_index(1)
       |> Enum.reduce( game, fn x, game ->
-        {game, _tally} = Game.make_move(game,elem(x,0))
+        {game, _tally} = Game.make_move(game,elem(x,0)|>elem(0))
         assert game.game_state == elem(x,0) |> elem(1)
         assert game.turn_left == 7 - elem(x,1)
         game
