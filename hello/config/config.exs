@@ -7,19 +7,19 @@
 # General application configuration
 import Config
 
-config :gallows,
+config :hello,
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :gallows, GallowsWeb.Endpoint,
+config :hello, HelloWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: GallowsWeb.ErrorHTML, json: GallowsWeb.ErrorJSON],
+    formats: [html: HelloWeb.ErrorHTML, json: HelloWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: Gallows.PubSub,
-  live_view: [signing_salt: "m3NnV+cG"]
+  pubsub_server: Hello.PubSub,
+  live_view: [signing_salt: "BEnAIhHv"]
 
 # Configures the mailer
 #
@@ -28,12 +28,12 @@ config :gallows, GallowsWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :gallows, Gallows.Mailer, adapter: Swoosh.Adapters.Local
+config :hello, Hello.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
-  gallows: [
+  hello: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
@@ -43,7 +43,7 @@ config :esbuild,
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "3.4.0",
-  gallows: [
+  hello: [
     args: ~w(
       --config=tailwind.config.js
       --input=css/app.css

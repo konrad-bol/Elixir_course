@@ -2,13 +2,13 @@ import Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :gallows, GallowsWeb.Endpoint,
+config :hello, HelloWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "RMl+a28vUmciE4KMF7MCsBBrw01+hvCZVZfgBu9v1CGExVDe4VgoVpf6z6V77qv+",
+  secret_key_base: "w3M8RIPPvHDYTMx63lrOpuszgcfgYRTywpF7UdK8nhUbt72zw/4C1i9g9fZFAY7R",
   server: false
 
 # In test we don't send emails.
-config :gallows, Gallows.Mailer, adapter: Swoosh.Adapters.Test
+config :hello, Hello.Mailer, adapter: Swoosh.Adapters.Test
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
