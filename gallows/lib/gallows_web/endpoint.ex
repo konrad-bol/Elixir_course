@@ -7,7 +7,7 @@ defmodule GallowsWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_gallows_key",
-    signing_salt: "nC/96P48",
+    signing_salt: "s6+AUjyY",
     same_site: "Lax"
   ]
 

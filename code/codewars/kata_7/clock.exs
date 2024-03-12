@@ -25,6 +25,7 @@ end
       _-> perm_list
    end
   end
+
   def check_perm(list) do
     list_of_uniq=list|>Enum.uniq()
     rep=Enum.map(list_of_uniq, fn x -> number_of_member(list,x) end)

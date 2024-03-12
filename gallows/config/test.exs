@@ -4,7 +4,7 @@ import Config
 # you can enable the server option below.
 config :gallows, GallowsWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "A7pdqYsYnNcYgs/nkOCjjF18TJK6P0CXyRuuM4aK9PVrKVJGSv1P+HQz6lzh7qrO",
+  secret_key_base: "YQ7aj+fj/26qMZlYYERjNB5oYjgTJfd5q9wwQ/LvH9D2+DpNvbGVJdtQQZfh/XDh",
   server: false
 
 # In test we don't send emails.

@@ -19,7 +19,7 @@ config :gallows, GallowsWeb.Endpoint,
     layout: false
   ],
   pubsub_server: Gallows.PubSub,
-  live_view: [signing_salt: "mq4YzDvK"]
+  live_view: [signing_salt: "L0sj/4us"]
 
 # Configures the mailer
 #
