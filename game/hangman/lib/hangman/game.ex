@@ -33,6 +33,7 @@ defmodule Hangman.Game do
      game_state: game.game_state,
      turn_left: game.turn_left,
      letters: reveal_guessed(game.letters, game.used),
+     word: game.letters,
      used: game.used |> MapSet.to_list() |> Enum.sort()
      }
   end

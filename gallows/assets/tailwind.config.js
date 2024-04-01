@@ -9,7 +9,8 @@ module.exports = {
   content: [
     "./js/**/*.js",
     "../lib/gallows_web.ex",
-    "../lib/gallows_web/**/*.*ex"
+    "../lib/gallows_web/**/*.*ex",
+    "../deps/phoenix_ui/**/*.*ex"
   ],
   theme: {
     extend: {
@@ -25,6 +26,7 @@ module.exports = {
     //
     //     <div class="phx-click-loading:animate-ping">
     //
+    plugin(({ addVariant }) => addVariant("invalid", ".invalid:not(.phx-no-feedback) &") ),
     plugin(({addVariant}) => addVariant("phx-no-feedback", [".phx-no-feedback&", ".phx-no-feedback &"])),
     plugin(({addVariant}) => addVariant("phx-click-loading", [".phx-click-loading&", ".phx-click-loading &"])),
     plugin(({addVariant}) => addVariant("phx-submit-loading", [".phx-submit-loading&", ".phx-submit-loading &"])),

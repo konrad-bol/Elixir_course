@@ -27,6 +27,10 @@ defmodule GallowsWeb.Endpoint do
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
+  def before_render(conn, _opts) do
+    IO.puts("True request: #{conn.method} #{conn.request_path}")
+    conn
+  end
   if code_reloading? do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
@@ -37,6 +41,8 @@ defmodule GallowsWeb.Endpoint do
     param_key: "request_logger",
     cookie_key: "request_logger"
 
+
+
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
@@ -46,6 +52,7 @@ defmodule GallowsWeb.Endpoint do
     json_decoder: Phoenix.json_library()
 
   plug Plug.MethodOverride
+  plug :before_render
   plug Plug.Head
   plug Plug.Session, @session_options
   plug GallowsWeb.Router
