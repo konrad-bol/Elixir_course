@@ -1,4 +1,4 @@
-defmodule GallowsWeb.CoreComponents do
+defmodule SocketGallowsWeb.CoreComponents do
   @moduledoc """
   Provides core UI components.
 
@@ -17,9 +17,7 @@ defmodule GallowsWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import GallowsWeb.Gettext
-
-
+  import SocketGallowsWeb.Gettext
 
   @doc """
   Renders a modal.
@@ -90,51 +88,6 @@ defmodule GallowsWeb.CoreComponents do
     </div>
     """
   end
-  attr :name, :string, required: true
-
-  def greet(assigns) do
-    ~H"""
-    <p>Hello, <%= @name %>!</p>
-    """
-  end
-  def alert(%{class: :danger}=assigns) do
-    ~H"""
-    <div role="alert">
-      <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-      <%=@mess %>
-      </div>
-      <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-       <p><%= render_slot(@inner_block) %></p>
-      </div>
-    </div>
-    """
-  end
-  def alert(%{class: :info,mess: _}=assigns) do
-    ~H"""
-    <div role="alert">
-      <div class="bg-blue-500 text-white font-bold rounded-t px-4 py-2">
-      <%=@mess %>
-      </div>
-      <div class="border border-t-0 border-blue-400 rounded-b bg-blue-100 px-4 py-3 text-blue-700">
-       <p><%= render_slot(@inner_block) %></p>
-      </div>
-    </div>
-    """
-  end
-  def alert(assigns) do
-    ~H"""
-    <div role="alert">
-      <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-      <%=@mess %>
-      </div>
-      <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-       <p><%= render_slot(@inner_block) %></p>
-      </div>
-    </div>
-    """
-  end
-
-
 
   @doc """
   Renders flash notices.
@@ -147,7 +100,7 @@ defmodule GallowsWeb.CoreComponents do
   attr :id, :string, doc: "the optional id of flash container"
   attr :flash, :map, default: %{}, doc: "the map of flash messages to display"
   attr :title, :string, default: nil
-  attr :kind, :atom, values: [:info, :error, :danger], doc: "used for styling and flash lookup"
+  attr :kind, :atom, values: [:info, :error], doc: "used for styling and flash lookup"
   attr :rest, :global, doc: "the arbitrary HTML attributes to add to the flash container"
 
   slot :inner_block, doc: "the optional inner block that renders the flash message"
@@ -164,18 +117,13 @@ defmodule GallowsWeb.CoreComponents do
       class={[
         "fixed top-2 right-2 mr-2 w-80 sm:w-96 z-50 rounded-lg p-3 ring-1",
         @kind == :info && "bg-emerald-50 text-emerald-800 ring-emerald-500 fill-cyan-900",
-        @kind == :error && "bg-rose-50 text-rose-900 shadow-md ring-rose-500 fill-rose-900",
-        @kind == :danger && "bg-red-50 text-red-900 shadow-md ring-red-500 fill-red-900",
-        @kind == :warning && "bg-orange-50 text-orange-900 shadow-md ring-orange-500 fill-orange-900",
-        @kind == :success && "bg-lime-50 text-lime-900 shadow-md ring-lime-500 fill-lime-900",
-        #true && "bg-yellow-50 text-yellow-900 shadow-md ring-yellow-500 fill-yellow-900"
+        @kind == :error && "bg-rose-50 text-rose-900 shadow-md ring-rose-500 fill-rose-900"
       ]}
       {@rest}
     >
       <p :if={@title} class="flex items-center gap-1.5 text-sm font-semibold leading-6">
         <.icon :if={@kind == :info} name="hero-information-circle-mini" class="h-4 w-4" />
         <.icon :if={@kind == :error} name="hero-exclamation-circle-mini" class="h-4 w-4" />
-        <.icon :if={@kind == :danger} name="hero-exclamation-circle-mini" class="h-4 w-4" />
         <%= @title %>
       </p>
       <p class="mt-2 text-sm leading-5"><%= msg %></p>
@@ -406,7 +354,7 @@ defmodule GallowsWeb.CoreComponents do
         id={@id}
         name={@name}
         class={[
-          "mt-2 block w-half rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
+          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
           "min-h-[6rem] phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400",
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
           @errors != [] && "border-rose-400 focus:border-rose-400"
@@ -712,9 +660,9 @@ defmodule GallowsWeb.CoreComponents do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(GallowsWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(SocketGallowsWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(GallowsWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(SocketGallowsWeb.Gettext, "errors", msg, opts)
     end
   end
 

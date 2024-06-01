@@ -10,28 +10,34 @@ defmodule GallowsWeb.HangmanHTML do
     :initializing => {:info,  "start"},
   }
 
+  def turn(left,target) when target>=left do
+    "opacity: 1"
+  end
+  def turn(_left,_target)do
+    "opacity: 0.1"
+  end
   def game_state(assigns,_) when assigns not in  [:won,:lost]  do
-    assigns={kind, mes}= @responses[assigns]
-
+    {kind, mes}= @responses[assigns]
+    assigns=%{kind: kind,mes: mes}
     #raise(inspect(assigns))
     #UI.flash(%{:kind=>:info,:flash=>%{},:id=>2,:rest=>nil,:inner_block=> "tak"})
     #UI.greet(%{:name=>"konrad"})
     ~H"""
-      <.flash kind={kind} flash={%{}}>
-        <%= mes %>
+      <.flash kind={@kind} flash={%{}}>
+        <%= @mes %>
       </.flash>
     """
   end
 
   def game_state(state=:lost,word) do
-    assigns={kind, mes}=@responses[state]
-
+    {kind, mes}=@responses[state]
+    assigns=%{kind: kind,mes: mes,word: word}
     ~H"""
-      <.flash kind={kind} flash={%{}} title="tak">
-        <%= mes %>
+      <.flash kind={@kind} flash={%{}} title="tak">
+        <%= @mes %>
       </.flash>
     <strong> You lost...</strong>
-    <p>the word was: <%=word%></p>
+    <p>the word was: <%=@word%></p>
     <.form for={} action="/hangman" method= "post" >
       <.button type="submit" class="button">
         Do you want play again?
@@ -51,6 +57,7 @@ defmodule GallowsWeb.HangmanHTML do
     </.form>
     """
   end
+
 
 
   embed_templates "hangman_html/*"

@@ -1,0 +1,9 @@
+Turn left: <%=@tally.turn_left %><br>
+used: <%=@tally.used %><br>
+Word so far: <%= Enum.join(@tally.letters," ")  %><br>
+
+
+<.form for={@form} action="/hangman" method= "put" >
+  <.input field={@form[:guess]} value="" />
+  <.button type="submit"> Guess letter </.button>
+</.form>

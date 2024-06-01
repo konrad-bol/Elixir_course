@@ -1,9 +1,9 @@
 defmodule GallowsWeb.HangmanController do
   use GallowsWeb, :controller
+
   def new_game(conn, _params) do
     render(conn, :new_game, layout: false)
   end
-
   def  index(conn,_params)do
     my_assign=[layout: { GallowsWeb.Layouts, :app}, number: 0, form: Phoenix.HTML.FormData.to_form(%{"guess"=> 3},as: "make_move"),met: "put"]
     conn
