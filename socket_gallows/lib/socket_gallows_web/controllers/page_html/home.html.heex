@@ -1,0 +1,13 @@
+<div id="app">
+<button @click="count++">
+    Count is: {{ count }}
+  </button>
+  
+  </div>
+
+<script type="module">
+  import { createApp } from 'vue'
+  import MyComponent from '../../../../js/app.js'
+
+  createApp(MyComponent).mount('#app')
+</script>

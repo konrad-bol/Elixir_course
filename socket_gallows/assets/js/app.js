@@ -19,6 +19,7 @@
 
 import "phoenix_html"
 import "./hangman_app"
+import "./node_modules/vue/dist/vue.global.js"
 // Establish Phoenix Socket and LiveView configuration.
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
